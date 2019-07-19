@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Game implements GetDrawPayload {
 
-    private final Paddle paddle_0 = new Paddle(0,150);
-    private final Paddle paddle_1 = new Paddle(365, 150);
+    private final Paddle paddle_0 = new Paddle(0,500f);
+    private final Paddle paddle_1 = new Paddle(1000f, 500f);
 
     private final List<Ball> balls = new ArrayList<>();
 
@@ -51,17 +51,17 @@ public class Game implements GetDrawPayload {
                 .forEach(e -> System.out.println(e.getKey()));
 
         if (input.keyPressed(InputFrame.W)) {
-            paddle_0.y -= delta * paddle_0.max_speed;
+            paddle_0.world_y -= delta * paddle_0.max_speed;
         }
         if (input.keyPressed(InputFrame.S)) {
-            paddle_0.y += delta * paddle_0.max_speed;
+            paddle_0.world_y += delta * paddle_0.max_speed;
         }
 
         if (input.keyPressed(InputFrame.UP)) {
-            paddle_1.y -= delta * paddle_1.max_speed;
+            paddle_1.world_y -= delta * paddle_1.max_speed;
         }
         if (input.keyPressed(InputFrame.DOWN)) {
-            paddle_1.y += delta * paddle_1.max_speed;
+            paddle_1.world_y += delta * paddle_1.max_speed;
         }
     }
 

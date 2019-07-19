@@ -8,8 +8,12 @@ import processing.event.KeyEvent;
 public class Main extends PApplet {
     private static Game game = null;
 
+    //todo - better place for these?
+    public static int camera_width = 400;
+    public static int camera_height = 400;
+
     public void settings() {
-        size(400, 400);
+        size(camera_width, camera_height);
     }
 
     @Override
@@ -31,7 +35,7 @@ public class Main extends PApplet {
         translate(payload.camera.translate_x, payload.camera.translate_y);
 
         for (Drawable d : payload.drawables){
-            d.draw(this);
+            d.draw(this, payload.camera);
         }
 
     }

@@ -16,20 +16,34 @@ public class Game implements GetDrawPayload {
 
     public final InputFrame input = new InputFrame();
 
+    public final boolean running = true;
+    private final int tickTime = 10;
+
     public void mainloop() {
-        
+        long past = System.currentTimeMillis();
+        long accumulator = 0;
+
+        while (running) {
+            long delta = System.currentTimeMillis() - past;
+            accumulator += delta;
+
+            while (accumulator >= tickTime) {
+                tick(tickTime / 1000);
+                accumulator -= tickTime;
+            }
+        }
     }
 
     private void tick(float delta) {
-        handleCollision();
-        handleInput();
+        handleCollision(delta);
+        handleInput(delta);
     }
 
-    private void handleCollision() {
+    private void handleCollision(float delta) {
         // todo.
     }
 
-    private void handleInput() {
+    private void handleInput(float delta) {
         // todo.
     }
 

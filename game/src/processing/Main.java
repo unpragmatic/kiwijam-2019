@@ -26,6 +26,10 @@ public class Main extends PApplet {
         DrawPayload payload = game.getDrawPayload();
         if (payload == null) { return; }
 
+        background(0);
+
+        translate(payload.camera.translate_x, payload.camera.translate_y);
+
         for (Drawable d : payload.drawables){
             d.draw(this);
         }

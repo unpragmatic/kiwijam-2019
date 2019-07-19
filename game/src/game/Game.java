@@ -2,6 +2,7 @@ package game;
 
 import game.objects.Ball;
 import game.objects.Paddle;
+import processing.Drawable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,11 @@ public class Game implements GetDrawPayload {
 
     @Override
     public DrawPayload getDrawPayload() {
-        return null;
+        List<Drawable> drawables = new ArrayList<>();
+        drawables.add(paddle_0);
+        drawables.add(paddle_1);
+        drawables.addAll(balls);
+
+        return new DrawPayload(drawables);
     }
 }

@@ -3,12 +3,23 @@ package processing;
 import game.DrawPayload;
 import game.Game;
 import processing.core.PApplet;
+import processing.event.KeyEvent;
 
 public class Main extends PApplet {
     private static Game game = null;
 
     public void settings() {
         size(400, 400);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent event) {
+        game.input.setKey(event.getKeyCode(), true);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent event) {
+        game.input.setKey(event.getKeyCode(), false);
     }
 
     public void draw() {

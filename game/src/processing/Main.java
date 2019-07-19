@@ -1,5 +1,6 @@
 package processing;
 
+import game.DrawPayload;
 import game.Game;
 import processing.core.PApplet;
 
@@ -11,6 +12,12 @@ public class Main extends PApplet {
     }
 
     public void draw() {
+        DrawPayload payload = game.getDrawPayload();
+
+        for (Drawable d : payload.drawables){
+            d.draw(this);
+        }
+
         background(50, 50, 50);
         square(50, 50, 100);
         text("Hello world", 50, 50);

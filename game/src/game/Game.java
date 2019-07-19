@@ -16,16 +16,20 @@ public class Game implements GetDrawPayload {
 
     public final InputFrame input = new InputFrame();
 
-    public void tick(float delta) {
+    public void mainloop() {
+        
+    }
+
+    private void tick(float delta) {
         handleCollision();
         handleInput();
     }
 
-    public void handleCollision() {
+    private void handleCollision() {
         // todo.
     }
 
-    public void handleInput() {
+    private void handleInput() {
         // todo.
     }
 

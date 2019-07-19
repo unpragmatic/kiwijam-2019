@@ -19,6 +19,8 @@ public class Main extends PApplet {
     public static void main(String[] args) {
         Main.game = new Game();
 
+
         PApplet.main("processing.Main");
+        Main.game.mainloop();
     }
 }

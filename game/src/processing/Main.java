@@ -29,7 +29,7 @@ public class Main extends PApplet {
         for (Drawable d : payload.drawables){
             d.draw(this);
         }
-        
+
     }
 
     public static void main(String[] args) {

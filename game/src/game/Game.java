@@ -16,8 +16,8 @@ public class Game implements GetDrawPayload {
 
     public final InputFrame input = new InputFrame();
 
-    public final boolean running = true;
-    private final int tickTime = 10;
+    private final boolean running = true;
+    private final int tickTime = 1000;
 
     public void mainloop() {
         long past = System.currentTimeMillis();
@@ -25,6 +25,7 @@ public class Game implements GetDrawPayload {
 
         while (running) {
             long delta = System.currentTimeMillis() - past;
+            past = System.currentTimeMillis();
             accumulator += delta;
 
             while (accumulator >= tickTime) {
@@ -45,6 +46,9 @@ public class Game implements GetDrawPayload {
 
     private void handleInput(float delta) {
         // todo.
+        input.onKeys.entrySet().stream()
+                .filter(e -> e.getValue())
+                .forEach(e -> System.out.println(e.getKey()));
     }
 
     @Override

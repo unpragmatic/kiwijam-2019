@@ -24,6 +24,7 @@ public class Main extends PApplet {
 
     public void draw() {
         DrawPayload payload = game.getDrawPayload();
+        if (payload == null) { return; }
 
         for (Drawable d : payload.drawables){
             d.draw(this);

@@ -14,6 +14,8 @@ public class Game implements GetDrawPayload {
 
     private final List<Ball> balls = new ArrayList<>();
 
+    public final InputFrame input = new InputFrame();
+
     public void tick(float delta) {
         handleCollision();
         handleInput();

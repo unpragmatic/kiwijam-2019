@@ -18,7 +18,7 @@ public class Game implements GetDrawPayload {
     public final InputFrame input = new InputFrame();
 
     private final boolean running = true;
-    private final int tickTime = 100;
+    private final int tickTime = 10;
 
     public void mainloop() {
         long past = System.currentTimeMillis();
@@ -30,7 +30,7 @@ public class Game implements GetDrawPayload {
             accumulator += delta;
 
             while (accumulator >= tickTime) {
-                tick(tickTime / 100);
+                tick(tickTime / 100f);
                 accumulator -= tickTime;
             }
         }

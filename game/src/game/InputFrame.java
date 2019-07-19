@@ -12,7 +12,8 @@ public class InputFrame {
     public final static int S = 83;
 
     public boolean keyPressed(int keycode) {
-        return onKeys.get(keycode);
+        Boolean val = onKeys.get(keycode);
+        return val == null ? false : val;
     }
 
     public void setKey(int keycode, boolean value) {

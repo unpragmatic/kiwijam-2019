@@ -1,5 +1,6 @@
 package game;
 
+import game.input.InputFrame;
 import game.objects.Ball;
 import game.objects.Paddle;
 import processing.Drawable;

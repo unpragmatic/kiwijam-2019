@@ -9,14 +9,12 @@ public class Paddle implements Drawable {
     private float x;
     private float y;
 
-    private float width;
-    private float height;
+    private float width = 25;
+    private float height = 100;
 
-    public Paddle(float x, float y, float width, float height){
+    public Paddle(float x, float y){
         this.x = x;
         this.y= y;
-        this.width = width;
-        this.height = height;
     }
 
     @Override

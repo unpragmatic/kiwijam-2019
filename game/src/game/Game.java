@@ -10,8 +10,8 @@ import java.util.List;
 public class Game implements GetDrawPayload {
 
     // todo: Add initialisation params such as position
-    private final Paddle paddle_0 = new Paddle(100, 100);
-    private final Paddle paddle_1 = new Paddle(100, 100);
+    private final Paddle paddle_0 = new Paddle(0,50);
+    private final Paddle paddle_1 = new Paddle(200, 50);
 
     private final List<Ball> balls = new ArrayList<>();
 

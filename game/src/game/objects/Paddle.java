@@ -13,8 +13,6 @@ public class Paddle implements Drawable {
     public Paddle(float x, float y){
         this.x = x;
         this.y= y;
-        this.width = width;
-        this.height = height;
     }
 
     @Override

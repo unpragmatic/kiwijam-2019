@@ -58,10 +58,10 @@ public class Game implements GetDrawPayload {
         }
 
         if (input.keyPressed(InputFrame.UP)) {
-            paddle_1.x -= delta * paddle_1.max_speed;
+            paddle_1.y -= delta * paddle_1.max_speed;
         }
         if (input.keyPressed(InputFrame.DOWN)) {
-            paddle_1.y -= delta * paddle_1.max_speed;
+            paddle_1.y += delta * paddle_1.max_speed;
         }
     }
 

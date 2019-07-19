@@ -5,12 +5,10 @@ import processing.core.PApplet;
 
 public class Paddle implements Drawable {
     public float max_speed = 100;
-
-    private float x;
-    private float y;
-
-    private float width = 25;
-    private float height = 100;
+    public float x;
+    public float y;
+    public float width = 35;
+    public float height = 200;
 
     public Paddle(float x, float y){
         this.x = x;

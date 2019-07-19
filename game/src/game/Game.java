@@ -17,7 +17,7 @@ public class Game implements GetDrawPayload {
     public final InputFrame input = new InputFrame();
 
     private final boolean running = true;
-    private final int tickTime = 1000;
+    private final int tickTime = 100;
 
     public void mainloop() {
         long past = System.currentTimeMillis();
@@ -29,7 +29,7 @@ public class Game implements GetDrawPayload {
             accumulator += delta;
 
             while (accumulator >= tickTime) {
-                tick(tickTime / 1000);
+                tick(tickTime / 100);
                 accumulator -= tickTime;
             }
         }
@@ -49,6 +49,20 @@ public class Game implements GetDrawPayload {
         input.onKeys.entrySet().stream()
                 .filter(e -> e.getValue())
                 .forEach(e -> System.out.println(e.getKey()));
+
+        if (input.keyPressed(InputFrame.W)) {
+            paddle_0.y -= delta * paddle_0.max_speed;
+        }
+        if (input.keyPressed(InputFrame.S)) {
+            paddle_0.y += delta * paddle_0.max_speed;
+        }
+
+        if (input.keyPressed(InputFrame.UP)) {
+            paddle_1.x -= delta * paddle_1.max_speed;
+        }
+        if (input.keyPressed(InputFrame.DOWN)) {
+            paddle_1.y -= delta * paddle_1.max_speed;
+        }
     }
 
     @Override

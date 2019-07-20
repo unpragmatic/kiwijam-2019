@@ -11,7 +11,7 @@ public class Main extends PApplet {
     private static Game game = null;
 
     public void settings() {
-        fullScreen();
+        size(1000, 600);
     }
 
     @Override

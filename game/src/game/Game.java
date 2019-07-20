@@ -8,6 +8,7 @@ import processing.Drawable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Game implements GetDrawPayload {
     public float room_width = 1777f;
@@ -56,7 +57,30 @@ public class Game implements GetDrawPayload {
 
     private void handleCollision(float delta) {
         // todo.
-        for (Ball b: balls) {
+        for (int i = 0; i < balls.size(); i++) {
+            Ball b = balls.get(i);
+            for (int j = i+1; j < balls.size(); j++) {
+                Ball b2 = balls.get(j);
+
+                if (Math.sqrt((b.x - b2.x)*(b.x - b2.x) + (b.y - b2.y)*(b.y - b2.y)) < b.radius + b2.radius) {
+                    float delta_x = b.x - b2.x;
+                    float delta_y = b.y - b2.y;
+
+                    float mag = delta_x*delta_x + delta_y*delta_y;
+
+                    float delta_dx = b.dx - b2.dx;
+                    float delta_dy = b.dy - b2.dy;
+
+                    float mass_ratio = 2/2f;
+                    float mass_velocity_multiplier = (delta_dx * delta_x + delta_dy * delta_y) / mag;
+                    b.dx = b.dx - mass_ratio * mass_velocity_multiplier * delta_x;
+                    b.dy = b.dy - mass_ratio * mass_velocity_multiplier * delta_y;
+
+                    b2.dx = b2.dx - mass_ratio * mass_velocity_multiplier * -delta_x;
+                    b2.dy = b2.dy - mass_ratio * mass_velocity_multiplier * -delta_y;
+                }
+            }
+
             if (b.y > paddle_0.y && b.y < paddle_0.y + paddle_0.height &&
                     b.x - b.radius < paddle_0.x + paddle_0.width && b.dx < 0) {
 
@@ -70,10 +94,10 @@ public class Game implements GetDrawPayload {
             }
 
             if (b.y - b.radius < 0 && b.dy < 0) {
-                b.dy *= 1;
+                b.dy *= -1;
             }
             if (b.y + b.radius > room_height && b.dy > 0) {
-                b.dy *= 1;
+                b.dy *= -1;
             }
         }
     }

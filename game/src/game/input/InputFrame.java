@@ -15,6 +15,10 @@ public class InputFrame {
     public final static int W = 87;
     public final static int S = 83;
 
+    //TODO - Remove After Testing
+    public final static int T = 84;
+    public final static int Y = 89;
+
     private final List<MouseDragListener> mouseDragListeners = new ArrayList<>();
     public void addMouseDragListener(MouseDragListener listener) {
         mouseDragListeners.add(listener);

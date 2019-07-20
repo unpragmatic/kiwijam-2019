@@ -51,8 +51,6 @@ public class Main extends PApplet {
 
         background(0);
 
-        translate(payload.camera.translate_x, payload.camera.translate_y);
-
         for (Drawable d : payload.drawables){
             d.draw(this, payload.camera);
         }
@@ -61,7 +59,6 @@ public class Main extends PApplet {
 
     public static void main(String[] args) {
         Main.game = new Game();
-
 
         PApplet.main("processing.Main");
         Main.game.mainloop();

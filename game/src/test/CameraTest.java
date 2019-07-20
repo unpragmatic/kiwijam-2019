@@ -40,4 +40,24 @@ public class CameraTest {
         System.out.println(c.pixel_to_world_y(400, 400));
         assert (c.pixel_to_world_y(400 ,400) == 1000);
     }
+
+    @Test
+    public void translated_camera_convert_world_to_pixel_x_returns_correct_value(){
+        Camera c = new Camera(100, 0, 1000, 1000);
+
+        System.out.println(c.world_to_pixel_x(0, 400));
+        System.out.println(c.world_to_pixel_x(100, 400));
+        System.out.println(c.world_to_pixel_x(100, 400));
+        System.out.println(c.world_to_pixel_x(110, 400));
+        System.out.println(c.world_to_pixel_x(1100, 400));
+    }
+
+    @Test
+    public void translated_camera_convert_pixel_to_world_x_returns_correct_value(){
+        Camera c = new Camera(100, 0, 1000, 1000);
+
+        System.out.println(c.pixel_to_world_x(0, 400));
+        System.out.println(c.pixel_to_world_x(100, 400));
+        System.out.println(c.pixel_to_world_x(400, 400));
+    }
 }

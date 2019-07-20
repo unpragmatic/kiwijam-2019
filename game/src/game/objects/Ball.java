@@ -25,6 +25,7 @@ public class Ball implements Drawable {
         int local_y = c.world_to_pixel_y(y, d.height);
         int local_size = c.world_to_pixel_width(radius*2, d.width);
 
+        d.fill(0.3f);
         d.circle(local_x, local_y, local_size);
     }
 }

@@ -49,7 +49,8 @@ public class Main extends PApplet {
         DrawPayload payload = game.getDrawPayload();
         if (payload == null) { return; }
 
-        background(0);
+        noStroke();
+        background(2434341);
 
         for (Drawable d : payload.drawables){
             d.draw(this, payload.camera);

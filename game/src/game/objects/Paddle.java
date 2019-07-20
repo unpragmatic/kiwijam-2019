@@ -5,7 +5,7 @@ import processing.Drawable;
 import processing.core.PApplet;
 
 public class Paddle implements Drawable {
-    public float max_speed = 100;
+    public float max_speed = 1500;
 
     public float x;
     public float y;
@@ -33,6 +33,7 @@ public class Paddle implements Drawable {
         int pixel_width = c.world_to_pixel_width(width, d.width);
         int pixel_height = c.world_to_pixel_y(height, d.height);
 
+        d.fill(173, 173, 173);
         d.rect(pixel_x, pixel_y, pixel_width, pixel_height);
     }
 }

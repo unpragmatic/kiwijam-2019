@@ -4,25 +4,32 @@ import game.input.InputFrame;
 import game.input.MouseDragEvent;
 import game.objects.Ball;
 import game.objects.Paddle;
+import game.objects.UI;
 import processing.Drawable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class Game implements GetDrawPayload {
     public float room_width = 1777f;
     public float room_height = 1000f;
 
+    private int player_0_life = 10;
+    private int player_1_life = 10;
+
+    // Game Objects
     private final Paddle paddle_0 = new Paddle(
             0f,
-            room_height / 2 - Paddle.default_height / 2);
-
+            room_height / 2 - Paddle.default_height / 2
+    );
     private final Paddle paddle_1 = new Paddle(
             room_width - Paddle.default_width,
-            room_height / 2 - Paddle.default_height / 2);
+            room_height / 2 - Paddle.default_height / 2
+    );
 
     private final List<Ball> balls = new ArrayList<>();
+
+    private final UI ui = new UI(this);
 
     public final InputFrame input = new InputFrame();
 
@@ -108,10 +115,9 @@ public class Game implements GetDrawPayload {
         // todo.
         while (!input.mouseDragEventQueue.isEmpty()) {
             MouseDragEvent event = input.mouseDragEventQueue.poll();
-            System.out.println("Mouse event");
             Ball new_ball = new Ball(event.startX, event.startY);
-            new_ball.dx = (event.endX - event.startX) / 5f;
-            new_ball.dy = (event.endY - event.startY) / 5f;
+            new_ball.dx = (event.endX - event.startX);
+            new_ball.dy = (event.endY - event.startY);
             balls.add(new_ball);
         }
 
@@ -141,7 +147,7 @@ public class Game implements GetDrawPayload {
     }
 
     public Camera getCamera() {
-        return new Camera(canonical_camera.translate_x, canonical_camera.translate_y, room_width, room_height);
+        return canonical_camera;
     }
 
     @Override
@@ -150,6 +156,7 @@ public class Game implements GetDrawPayload {
         drawables.add(paddle_0);
         drawables.add(paddle_1);
         drawables.addAll(balls);
+        drawables.add(ui);
 
 
         return new DrawPayload(drawables, this.getCamera());

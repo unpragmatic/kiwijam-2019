@@ -20,12 +20,10 @@ public class Ball implements Drawable {
     @Override
     public void draw(PApplet d, Camera c) {
 
-        /**
-        int local_x = c.world_to_local_x(x);
-        int local_y = c.world_to_local_y(y);
-        int size = c.world_to_local_x(radius*2);
+        int local_x = c.world_to_pixel_x(x, d.width);
+        int local_y = c.world_to_pixel_x(y, d.height);
+        int local_size = c.world_to_pixel_x(radius*2, d.width);
 
         d.circle(local_x, local_y, local_size);
-         **/
     }
 }

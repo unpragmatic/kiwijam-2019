@@ -15,6 +15,7 @@ public class Ball implements Drawable {
     public Ball(float x, float y){
         this.x = x;
         this.y = y;
+        System.out.println("Ball created with world X pos: " + x + " and world y pos: " + y);
     }
 
     @Override
@@ -22,7 +23,7 @@ public class Ball implements Drawable {
 
         int local_x = c.world_to_pixel_x(x, d.width);
         int local_y = c.world_to_pixel_y(y, d.height);
-        int local_size = c.world_to_pixel_x(radius*2, d.width);
+        int local_size = c.world_to_pixel_width(radius*2, d.width);
 
         d.circle(local_x, local_y, local_size);
     }

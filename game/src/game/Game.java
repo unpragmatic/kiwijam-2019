@@ -25,6 +25,8 @@ public class Game implements GetDrawPayload {
 
     public final InputFrame input = new InputFrame();
 
+    private Camera canonical_camera = new Camera(0, 0, room_width, room_height);
+
     private final boolean running = true;
     private final int tickTime = 10;
 
@@ -38,7 +40,7 @@ public class Game implements GetDrawPayload {
             accumulator += delta;
 
             while (accumulator >= tickTime) {
-                tick(tickTime / 100f);
+                tick(tickTime / 1000f);
                 accumulator -= tickTime;
             }
         }
@@ -106,10 +108,16 @@ public class Game implements GetDrawPayload {
         if (input.keyPressed(InputFrame.DOWN)) {
             paddle_1.y += delta * paddle_1.max_speed;
         }
+        if (input.keyPressed(InputFrame.T)){
+            canonical_camera.translate_x -= 10;
+        }
+        if (input.keyPressed(InputFrame.Y)){
+            canonical_camera.translate_x += 10;
+        }
     }
 
     public Camera getCamera() {
-        return new Camera(0, 0, room_width, room_height);
+        return new Camera(canonical_camera.translate_x, canonical_camera.translate_y, room_width, room_height);
     }
 
     @Override

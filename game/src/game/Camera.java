@@ -27,19 +27,19 @@ public class Camera {
         return translate_y;
     }
 
-    public int world_to_local_x(float world){
-        return Math.round((world / scalar_x) * width);
+    public int world_to_local_x(float world_x){
+        return Math.round((world_x / scalar_x) * width);
     }
 
-    public int world_to_local_y(float world){
-        return Math.round((world / scalar_y) * height);
+    public int world_to_local_y(float world_y){
+        return Math.round((world_y / scalar_y) * height);
     }
 
-    public float local_to_world_x(int local){
-        return (local / width) * scalar_x;
+    public float local_to_world_x(int local_x){
+        return (local_x / width) * scalar_x;
     }
 
-    public float local_to_world_y(int local){
-        return (local / height) * scalar_y;
+    public float local_to_world_y(int local_y){
+        return (local_y / height) * scalar_y;
     }
 }

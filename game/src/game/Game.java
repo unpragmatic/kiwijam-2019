@@ -1,6 +1,7 @@
 package game;
 
 import game.input.InputFrame;
+import game.input.MouseDragEvent;
 import game.objects.Ball;
 import game.objects.Paddle;
 import processing.Drawable;
@@ -42,6 +43,11 @@ public class Game implements GetDrawPayload {
     private void tick(float delta) {
         handleCollision(delta);
         handleInput(delta);
+
+        for (Ball b: balls) {
+            b.x += b.dx * delta;
+            b.y += b.dy * delta;
+        }
     }
 
     private void handleCollision(float delta) {
@@ -50,9 +56,18 @@ public class Game implements GetDrawPayload {
 
     private void handleInput(float delta) {
         // todo.
-        input.onKeys.entrySet().stream()
-                .filter(e -> e.getValue())
-                .forEach(e -> System.out.println(e.getKey()));
+        while (!input.mouseDragEventQueue.isEmpty()) {
+            MouseDragEvent event = input.mouseDragEventQueue.poll();
+            System.out.println("Mouse event");
+            Ball new_ball = new Ball(event.startX, event.startY);
+            new_ball.dx = (event.endX - event.startX) / 10f;
+            new_ball.dy = (event.endY - event.startY) / 10f;
+            balls.add(new_ball);
+        }
+
+//        input.onKeys.entrySet().stream()
+//                .filter(e -> e.getValue())
+//                .forEach(e -> System.out.println(e.getKey()));
 
         if (input.keyPressed(InputFrame.W)) {
             paddle_0.y -= delta * paddle_0.max_speed;

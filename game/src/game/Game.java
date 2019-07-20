@@ -51,7 +51,7 @@ public class Game implements GetDrawPayload {
             accumulator += delta;
 
             while (accumulator >= tickTime) {
-                tick(tickTime / 100f);
+                tick(tickTime / 1000f);
                 accumulator -= tickTime;
             }
         }

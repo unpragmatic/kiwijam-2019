@@ -148,7 +148,7 @@ public class Game implements GetDrawPayload {
             canonical_camera.translate_x += 10;
         }
         if (input.keyPressed(InputFrame.G)){
-            powerups.add(new Powerup(50, 50, Effect.Name.SPEED));
+            powerups.add(new Powerup(10, 10, Effect.Name.SPEED));
         }
     }
 

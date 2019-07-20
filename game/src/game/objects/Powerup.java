@@ -9,6 +9,9 @@ import processing.core.PImage;
 
 public class Powerup implements Drawable {
 
+    public static final int IMAGE_WIDTH = 128;
+    public static final int IMAGE_HEIGHT = 128;
+
     public float x;
     public float y;
 
@@ -26,7 +29,7 @@ public class Powerup implements Drawable {
         int pixel_x = c.world_to_pixel_x(x, d.width);
         int pixel_y = c.world_to_pixel_y(y, d.height);
 
-        d.image(img, pixel_x, pixel_y);
+        d.image(img, pixel_x, pixel_y, IMAGE_WIDTH, IMAGE_HEIGHT);
     }
 
 

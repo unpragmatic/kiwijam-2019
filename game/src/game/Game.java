@@ -119,8 +119,8 @@ public class Game implements GetDrawPayload {
         while (!input.mouseDragEventQueue.isEmpty()) {
             MouseDragEvent event = input.mouseDragEventQueue.poll();
             Ball new_ball = new Ball(event.startX, event.startY);
-            new_ball.dx = (event.endX - event.startX);
-            new_ball.dy = (event.endY - event.startY);
+            new_ball.dx = (event.endX - event.startX)*2.5f;
+            new_ball.dy = (event.endY - event.startY)*2.5f;
             balls.add(new_ball);
         }
 

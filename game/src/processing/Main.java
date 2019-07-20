@@ -6,6 +6,7 @@ import game.input.MouseDragEvent;
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
+import processing.sound.SoundFile;
 
 public class Main extends PApplet {
     private static Game game = null;
@@ -18,6 +19,9 @@ public class Main extends PApplet {
 
     public void setup(){
         resourceLoader = new ResourceLoader(this);
+
+        SoundFile file =  new SoundFile(this, "bff1.mp3");
+        file.play();
     }
 
     @Override

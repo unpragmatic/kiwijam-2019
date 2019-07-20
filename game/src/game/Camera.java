@@ -34,4 +34,12 @@ public class Camera {
     public int world_to_local_y(float world){
         return Math.round((world / scalar_y) * height);
     }
+
+    public float local_to_world_x(int local){
+        return (local / width) * scalar_x;
+    }
+
+    public float local_to_world_y(int local){
+        return (local / height) * scalar_y;
+    }
 }

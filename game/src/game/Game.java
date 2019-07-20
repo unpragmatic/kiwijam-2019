@@ -52,17 +52,17 @@ public class Game implements GetDrawPayload {
                 .forEach(e -> System.out.println(e.getKey()));
 
         if (input.keyPressed(InputFrame.W)) {
-            paddle_0.world_y -= delta * paddle_0.max_speed;
+            paddle_0.y -= delta * paddle_0.max_speed;
         }
         if (input.keyPressed(InputFrame.S)) {
-            paddle_0.world_y += delta * paddle_0.max_speed;
+            paddle_0.y += delta * paddle_0.max_speed;
         }
 
         if (input.keyPressed(InputFrame.UP)) {
-            paddle_1.world_y -= delta * paddle_1.max_speed;
+            paddle_1.y -= delta * paddle_1.max_speed;
         }
         if (input.keyPressed(InputFrame.DOWN)) {
-            paddle_1.world_y += delta * paddle_1.max_speed;
+            paddle_1.y += delta * paddle_1.max_speed;
         }
     }
 

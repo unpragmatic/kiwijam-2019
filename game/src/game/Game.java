@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game implements GetDrawPayload {
-
+    public float room_width = 1777f;
+    public float room_height = 1000f;
     private final Paddle paddle_0 = new Paddle(0f, 500f,
             Paddle.default_width, Paddle.default_height);
 
@@ -52,6 +53,23 @@ public class Game implements GetDrawPayload {
 
     private void handleCollision(float delta) {
         // todo.
+        for (Ball b: balls) {
+            if (b.y > paddle_0.y && b.y < paddle_0.y + paddle_0.height &&
+                    b.x - b.radius < paddle_0.x + paddle_0.width) {
+
+                b.dx *= -1;
+            }
+
+            if (b.y > paddle_1.y && b.y < paddle_1.y + paddle_1.height &&
+                    b.x + b.radius > paddle_1.x + paddle_1.width) {
+
+                b.dx *= -1;
+            }
+
+            if (b.y - b.radius < 0 || b.y + b.radius > room_height) {
+                b.dy *= 1;
+            }
+        }
     }
 
     private void handleInput(float delta) {

@@ -33,7 +33,6 @@ public class Paddle implements Drawable {
         int pixel_width = c.world_to_pixel_width(width, d.width);
         int pixel_height = c.world_to_pixel_y(height, d.height);
 
-        System.out.println("Drawing Paddle with x " + pixel_x + "and y " + pixel_y);
         d.rect(pixel_x, pixel_y, pixel_width, pixel_height);
     }
 }

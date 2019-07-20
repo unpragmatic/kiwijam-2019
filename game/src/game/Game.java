@@ -148,8 +148,12 @@ public class Game implements GetDrawPayload {
             canonical_camera.translate_x += 10;
         }
         if (input.keyPressed(InputFrame.G)){
-            powerups.add(new Powerup(50, 50, Effect.Name.SPEED));
+            powerups.add(new Powerup(100, 100, Effect.Name.SPEED));
         }
+        if (input.keyPressed(InputFrame.H)){
+            Effect.applyEffect(Effect.Name.SPEED, this, balls.get(0));
+        }
+
     }
 
     public Camera getCamera() {

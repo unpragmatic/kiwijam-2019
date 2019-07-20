@@ -2,6 +2,7 @@ package game.objects;
 
 import game.Camera;
 import processing.Drawable;
+import processing.ResourceLoader;
 import processing.core.PApplet;
 
 public class Paddle implements Drawable {
@@ -25,7 +26,7 @@ public class Paddle implements Drawable {
 
 
     @Override
-    public void draw(PApplet d, Camera c) {
+    public void draw(PApplet d, Camera c, ResourceLoader r) {
 
         int pixel_x = c.world_to_pixel_x(x, d.width);
         int pixel_y = c.world_to_pixel_y(y, d.height);
@@ -36,4 +37,5 @@ public class Paddle implements Drawable {
         d.fill(173, 173, 173);
         d.rect(pixel_x, pixel_y, pixel_width, pixel_height);
     }
+
 }

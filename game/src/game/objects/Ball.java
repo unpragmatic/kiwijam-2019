@@ -2,6 +2,7 @@ package game.objects;
 
 import game.Camera;
 import processing.Drawable;
+import processing.ResourceLoader;
 import processing.core.PApplet;
 
 public class Ball implements Drawable {
@@ -19,7 +20,7 @@ public class Ball implements Drawable {
     }
 
     @Override
-    public void draw(PApplet d, Camera c) {
+    public void draw(PApplet d, Camera c, ResourceLoader r) {
 
         int local_x = c.world_to_pixel_x(x, d.width);
         int local_y = c.world_to_pixel_y(y, d.height);

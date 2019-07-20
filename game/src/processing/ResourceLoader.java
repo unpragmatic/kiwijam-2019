@@ -1,9 +1,11 @@
 package processing;
 
 import game.Effect;
+import game.objects.Powerup;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.io.PipedWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +19,9 @@ public class ResourceLoader {
 
     private void loadImages(PApplet applet){
         for (Effect.Name effectName : Effect.Name.values()){
-            imageMap.put(effectName.toString(), applet.loadImage(effectName.toString() + ".png"));
+            PImage img = applet.loadImage(effectName.toString() + ".png");
+            //img.resize(Powerup.IMAGE_WIDTH, Powerup.IMAGE_HEIGHT);
+            imageMap.put(effectName.toString(), img);
         }
     }
 

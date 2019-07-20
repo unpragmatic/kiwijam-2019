@@ -15,6 +15,7 @@ public class Main extends PApplet {
 
     public void settings() {
         size(1000, 600);
+        noSmooth();
     }
 
     public void setup(){
@@ -63,7 +64,7 @@ public class Main extends PApplet {
         background(2434341);
 
         for (Drawable d : payload.drawables){
-            d.draw(this, payload.camera);
+            d.draw(this, payload.camera, resourceLoader);
         }
 
     }

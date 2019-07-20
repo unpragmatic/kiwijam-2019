@@ -10,12 +10,8 @@ import processing.event.MouseEvent;
 public class Main extends PApplet {
     private static Game game = null;
 
-    //todo - better place for these?
-    public static int camera_width = 400;
-    public static int camera_height = 400;
-
     public void settings() {
-        size(camera_width, camera_height);
+        fullScreen();
     }
 
     @Override
@@ -42,10 +38,10 @@ public class Main extends PApplet {
     @Override
     public void mouseReleased(MouseEvent event) {
         super.mouseReleased(event);
-        float start_x = game.getDrawPayload().camera.local_to_world_x(lastMousePressX);
-        float start_y = game.getDrawPayload().camera.local_to_world_y(lastMousePressY);
-        float end_x = game.getDrawPayload().camera.local_to_world_x(event.getX());
-        float end_y = game.getDrawPayload().camera.local_to_world_x(event.getY());
+        float start_x = game.getDrawPayload().camera.pixel_to_world_x(lastMousePressX, width);
+        float start_y = game.getDrawPayload().camera.pixel_to_world_y(lastMousePressY, height);
+        float end_x = game.getDrawPayload().camera.pixel_to_world_x(event.getX(), width);
+        float end_y = game.getDrawPayload().camera.pixel_to_world_y(event.getY(), height);
         game.input.broadcastMouseDrag(new MouseDragEvent(start_x, start_y, end_x, end_y));
     }
 

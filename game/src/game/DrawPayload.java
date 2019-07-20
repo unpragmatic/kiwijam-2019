@@ -13,7 +13,7 @@ public class DrawPayload {
 
     public DrawPayload(List<Drawable> drawables) {
         this.drawables = drawables;
-        this.camera = new Camera(Main.camera_width, Main.camera_height);
+        this.camera = new Camera(0, 0, 1000, 1000);
     }
 
 }

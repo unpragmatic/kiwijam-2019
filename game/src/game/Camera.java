@@ -2,44 +2,33 @@ package game;
 
 public class Camera {
 
-    public static float scalar_x = 1000f;
-    public static float scalar_y = 1000f;
-
-    public float width;
-    public float height;
+    public float VIEWPORT_WIDTH;
+    public float VIEWPORT_HEIGHT;
 
     public float translate_x;
     public float translate_y;
 
-    public Camera(int width, int height){
-        this.width = width;
-        this.height = height;
-
-        this.translate_x = 0;
-        this.translate_y = 0;
+    public Camera(float translate_x, float translate_y, float VIEWPORT_WIDTH, float VIEWPORT_HEIGHT){
+        this.translate_x = translate_x;
+        this.translate_y = translate_y;
+        this.VIEWPORT_WIDTH = VIEWPORT_WIDTH;
+        this.VIEWPORT_HEIGHT = VIEWPORT_HEIGHT;
     }
 
-    public float getTranslate_x() {
-        return translate_x;
+    public int world_to_pixel_x(float world_x, float pixel_width){
+        return Math.round(((world_x - translate_x) / VIEWPORT_WIDTH) * pixel_width);
     }
 
-    public float getTranslate_y() {
-        return translate_y;
+    public int world_to_pixel_y(float world_y, float pixel_height){
+        return Math.round(((world_y - translate_x) / VIEWPORT_HEIGHT) * pixel_height);
     }
 
-    public int world_to_local_x(float world_x){
-        return Math.round((world_x / scalar_x) * width);
+    public float pixel_to_world_x(int pixel_x, float pixel_width){
+        return ((pixel_x / pixel_width) * VIEWPORT_WIDTH) + translate_x;
     }
 
-    public int world_to_local_y(float world_y){
-        return Math.round((world_y / scalar_y) * height);
+    public float pixel_to_world_y(int pixel_y, float pixel_height){
+        return ((pixel_y / pixel_height) * VIEWPORT_HEIGHT) + translate_y;
     }
 
-    public float local_to_world_x(int local_x){
-        return (local_x / width) * scalar_x;
-    }
-
-    public float local_to_world_y(int local_y){
-        return (local_y / height) * scalar_y;
-    }
 }

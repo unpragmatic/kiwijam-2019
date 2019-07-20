@@ -27,12 +27,12 @@ public class Paddle implements Drawable {
     @Override
     public void draw(PApplet d, Camera c) {
 
-        int local_x = c.world_to_local_x(x);
-        int local_y = c.world_to_local_y(y);
+        int pixel_x = c.world_to_pixel_x(x, d.width);
+        int pixel_y = c.world_to_pixel_y(y, d.height);
 
-        int local_width = c.world_to_local_x(width);
-        int local_height = c.world_to_local_y(height);
+        int pixel_width = c.world_to_pixel_x(width, d.width);
+        int pixel_height = c.world_to_pixel_y(height, d.height);
 
-        d.rect(local_x, local_y, local_width, local_height);
+        d.rect(pixel_x, pixel_y, pixel_width, pixel_height);
     }
 }

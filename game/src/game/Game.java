@@ -12,11 +12,14 @@ import java.util.List;
 public class Game implements GetDrawPayload {
     public float room_width = 1777f;
     public float room_height = 1000f;
-    private final Paddle paddle_0 = new Paddle(0f, 500f,
-            Paddle.default_width, Paddle.default_height);
 
-    private final Paddle paddle_1 = new Paddle((1000f - Paddle.default_width), 500f,
-            Paddle.default_width, Paddle.default_height);
+    private final Paddle paddle_0 = new Paddle(
+            0f,
+            room_height / 2 - Paddle.default_height / 2);
+
+    private final Paddle paddle_1 = new Paddle(
+            room_width - Paddle.default_width,
+            room_height / 2 - Paddle.default_height / 2);
 
     private final List<Ball> balls = new ArrayList<>();
 
@@ -55,18 +58,21 @@ public class Game implements GetDrawPayload {
         // todo.
         for (Ball b: balls) {
             if (b.y > paddle_0.y && b.y < paddle_0.y + paddle_0.height &&
-                    b.x - b.radius < paddle_0.x + paddle_0.width) {
+                    b.x - b.radius < paddle_0.x + paddle_0.width && b.dx < 0) {
 
                 b.dx *= -1;
             }
 
+            // With right side
             if (b.y > paddle_1.y && b.y < paddle_1.y + paddle_1.height &&
-                    b.x + b.radius > paddle_1.x + paddle_1.width) {
-
+                    b.x + b.radius > paddle_1.x && b.dx > 0) {
                 b.dx *= -1;
             }
 
-            if (b.y - b.radius < 0 || b.y + b.radius > room_height) {
+            if (b.y - b.radius < 0 && b.dy < 0) {
+                b.dy *= 1;
+            }
+            if (b.y + b.radius > room_height && b.dy > 0) {
                 b.dy *= 1;
             }
         }
@@ -78,8 +84,8 @@ public class Game implements GetDrawPayload {
             MouseDragEvent event = input.mouseDragEventQueue.poll();
             System.out.println("Mouse event");
             Ball new_ball = new Ball(event.startX, event.startY);
-            new_ball.dx = (event.endX - event.startX) / 10f;
-            new_ball.dy = (event.endY - event.startY) / 10f;
+            new_ball.dx = (event.endX - event.startX) / 5f;
+            new_ball.dy = (event.endY - event.startY) / 5f;
             balls.add(new_ball);
         }
 
@@ -102,6 +108,10 @@ public class Game implements GetDrawPayload {
         }
     }
 
+    public Camera getCamera() {
+        return new Camera(0, 0, room_width, room_height);
+    }
+
     @Override
     public DrawPayload getDrawPayload() {
         List<Drawable> drawables = new ArrayList<>();
@@ -109,6 +119,7 @@ public class Game implements GetDrawPayload {
         drawables.add(paddle_1);
         drawables.addAll(balls);
 
-        return new DrawPayload(drawables);
+
+        return new DrawPayload(drawables, this.getCamera());
     }
 }

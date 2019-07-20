@@ -16,11 +16,11 @@ public class Paddle implements Drawable {
     public float width;
     public float height;
 
-    public Paddle(float x, float y, float width, float height){
+    public Paddle(float x, float y){
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.width = Paddle.default_width;
+        this.height = Paddle.default_height;
     }
 
 

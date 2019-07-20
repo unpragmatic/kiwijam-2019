@@ -10,8 +10,14 @@ import processing.event.MouseEvent;
 public class Main extends PApplet {
     private static Game game = null;
 
+    public ResourceLoader resourceLoader;
+
     public void settings() {
         size(1000, 600);
+    }
+
+    public void setup(){
+        resourceLoader = new ResourceLoader(this);
     }
 
     @Override

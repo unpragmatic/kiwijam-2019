@@ -4,7 +4,9 @@ import game.input.InputFrame;
 import game.input.MouseDragEvent;
 import game.objects.Ball;
 import game.objects.Paddle;
+import game.objects.Powerup;
 import processing.Drawable;
+import processing.ResourceLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class Game implements GetDrawPayload {
             room_height / 2 - Paddle.default_height / 2);
 
     private final List<Ball> balls = new ArrayList<>();
+    private final List<Powerup> powerups = new ArrayList<>();
 
     public final InputFrame input = new InputFrame();
 
@@ -41,7 +44,7 @@ public class Game implements GetDrawPayload {
             accumulator += delta;
 
             while (accumulator >= tickTime) {
-                tick(tickTime / 1000f);
+                tick(tickTime / 100f);
                 accumulator -= tickTime;
             }
         }
@@ -138,6 +141,9 @@ public class Game implements GetDrawPayload {
         if (input.keyPressed(InputFrame.Y)){
             canonical_camera.translate_x += 10;
         }
+        if (input.keyPressed(InputFrame.G)){
+            powerups.add(new Powerup(50, 50, Effect.Name.SPEED));
+        }
     }
 
     public Camera getCamera() {
@@ -150,6 +156,7 @@ public class Game implements GetDrawPayload {
         drawables.add(paddle_0);
         drawables.add(paddle_1);
         drawables.addAll(balls);
+        drawables.addAll(powerups);
 
 
         return new DrawPayload(drawables, this.getCamera());

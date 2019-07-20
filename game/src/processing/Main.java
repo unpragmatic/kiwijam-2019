@@ -42,11 +42,11 @@ public class Main extends PApplet {
     @Override
     public void mouseReleased(MouseEvent event) {
         super.mouseReleased(event);
-        game.input.broadcastMouseDrag(new MouseDragEvent(
-                lastMousePressX, lastMousePressY,
-                event.getX(), event.getY()
-                )
-        );
+        float start_x = game.getDrawPayload().camera.local_to_world_x(lastMousePressX);
+        float start_y = game.getDrawPayload().camera.local_to_world_y(lastMousePressY);
+        float end_x = game.getDrawPayload().camera.local_to_world_x(event.getX());
+        float end_y = game.getDrawPayload().camera.local_to_world_x(event.getY());
+        game.input.broadcastMouseDrag(new MouseDragEvent(start_x, start_y, end_x, end_y));
     }
 
     public void draw() {

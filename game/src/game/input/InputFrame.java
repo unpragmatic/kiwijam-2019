@@ -3,23 +3,25 @@ package game.input;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class InputFrame {
     public final Map<Integer, Boolean> onKeys = new ConcurrentHashMap<>();
-
+    public final Queue<MouseDragEvent> mouseDragEventQueue = new ConcurrentLinkedQueue<>();
     public final static int UP = 38;
     public final static int DOWN = 40;
     public final static int W = 87;
     public final static int S = 83;
 
     private final List<MouseDragListener> mouseDragListeners = new ArrayList<>();
-
     public void addMouseDragListener(MouseDragListener listener) {
         mouseDragListeners.add(listener);
     }
 
     public void broadcastMouseDrag(MouseDragEvent event) {
+        mouseDragEventQueue.add(event);
         mouseDragListeners.forEach(l -> l.onDrag(event));
     }
 

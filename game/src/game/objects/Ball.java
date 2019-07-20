@@ -8,6 +8,8 @@ public class Ball implements Drawable {
     
     public float x;
     public float y;
+    public float dx;
+    public float dy;
     public float world_size = 50f;
 
     public Ball(float x, float y){

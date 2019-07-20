@@ -10,7 +10,7 @@ public class Ball implements Drawable {
     public float y;
     public float dx;
     public float dy;
-    public float size = 50f;
+    public float radius = 25f;
 
     public Ball(float x, float y){
         this.x = x;
@@ -23,7 +23,7 @@ public class Ball implements Drawable {
         /**
         int local_x = c.world_to_local_x(x);
         int local_y = c.world_to_local_y(y);
-        int local_size = c.world_to_local_x(size);
+        int size = c.world_to_local_x(radius*2);
 
         d.circle(local_x, local_y, local_size);
          **/

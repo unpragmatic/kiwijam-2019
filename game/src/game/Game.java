@@ -150,6 +150,10 @@ public class Game implements GetDrawPayload {
         if (input.keyPressed(InputFrame.G)){
             powerups.add(new Powerup(100, 100, Effect.Name.SPEED));
         }
+        if (input.keyPressed(InputFrame.H)){
+            Effect.applyEffect(Effect.Name.SPEED, this, balls.get(0));
+        }
+
     }
 
     public Camera getCamera() {

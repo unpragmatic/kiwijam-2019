@@ -10,8 +10,11 @@ import java.util.List;
 
 public class Game implements GetDrawPayload {
 
-    private final Paddle paddle_0 = new Paddle(0,500f);
-    private final Paddle paddle_1 = new Paddle(1000f, 500f);
+    private final Paddle paddle_0 = new Paddle(0f, 500f,
+            Paddle.default_width, Paddle.default_height);
+
+    private final Paddle paddle_1 = new Paddle((1000f - Paddle.default_width), 500f,
+            Paddle.default_width, Paddle.default_height);
 
     private final List<Ball> balls = new ArrayList<>();
 

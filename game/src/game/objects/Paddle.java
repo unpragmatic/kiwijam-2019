@@ -10,13 +10,19 @@ public class Paddle implements Drawable {
     public float x;
     public float y;
 
-    public float world_width = 35f;
-    public float world_height = 200f;
+    public static final float default_width = 35f;
+    public static final float default_height = 200f;
 
-    public Paddle(float x, float y){
+    public float width;
+    public float height;
+
+    public Paddle(float x, float y, float width, float height){
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
     }
+
 
     @Override
     public void draw(PApplet d, Camera c) {
@@ -24,9 +30,9 @@ public class Paddle implements Drawable {
         int local_x = c.world_to_local_x(x);
         int local_y = c.world_to_local_y(y);
 
-        int width = c.world_to_local_x(world_width);
-        int height = c.world_to_local_y(world_height);
+        int local_width = c.world_to_local_x(width);
+        int local_height = c.world_to_local_y(height);
 
-        d.rect(local_x, local_y, width, height);
+        d.rect(local_x, local_y, local_width, local_height);
     }
 }

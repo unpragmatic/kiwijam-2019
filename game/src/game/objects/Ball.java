@@ -1,12 +1,10 @@
 package game.objects;
 
 import game.Camera;
-import org.apache.commons.collections4.queue.CircularFifoQueue;
 import processing.Drawable;
 import processing.ResourceLoader;
 import processing.core.PApplet;
 
-import org.apache.commons.collections4.*;
 import processing.core.PConstants;
 import processing.core.PShape;
 

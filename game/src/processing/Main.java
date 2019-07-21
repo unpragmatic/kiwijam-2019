@@ -22,6 +22,8 @@ public class Main extends PApplet {
         resourceLoader = new ResourceLoader(this);
         surface.setResizable(true);
         frameRate(60);
+
+        ResourceLoader.playSound("bff1.mp3");
     }
 
     @Override

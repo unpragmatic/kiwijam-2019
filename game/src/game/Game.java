@@ -4,6 +4,7 @@ import game.input.InputFrame;
 import game.input.MouseDragEvent;
 import game.objects.*;
 import processing.Drawable;
+import processing.ResourceLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,10 @@ public class Game implements GetDrawPayload {
     private final float upper_border_y = ROOM_HEIGHT * 0.10f;
     private final float lower_border_y = ROOM_HEIGHT * 0.90f;
 
-    public int player_0_life = 10;
-    public int player_0_life_total = 10;
-    public int player_1_life = 10;
-    public int player_1_life_total = 10;
+    public int player_0_life_total = 100;
+    public int player_1_life_total = 100;
+    public int player_0_life = player_0_life_total;
+    public int player_1_life = player_1_life_total;
 
     // Game Objects
     private final Paddle paddle_0 = new Paddle(
@@ -31,10 +32,18 @@ public class Game implements GetDrawPayload {
             ROOM_HEIGHT / 2 - Paddle.DEFAULT_HEIGHT / 2
     );
 
-    private final List<Ball> balls = new ArrayList<>();
+    private final List<Ball> balls = createBalls();
     private final List<Powerup> powerups = new ArrayList<>();
     private final Border upper_border = new Border(0, upper_border_y);
     private final Border lower_border = new Border(0, lower_border_y);
+
+    private static List<Ball> createBalls() {
+        ArrayList<Ball> output = new ArrayList<>();
+        Ball b = new Ball(ROOM_WIDTH/2, ROOM_HEIGHT/2);
+        b.dx = 1500f;
+        output.add(b);
+        return output;
+    }
 
     private final UI ui = new UI(this);
 
@@ -46,12 +55,18 @@ public class Game implements GetDrawPayload {
     private final int tickTime = 10;
 
     private void restart() {
-        paddle_0.x = ROOM_WIDTH - Paddle.DEFAULT_WIDTH - padding;
+        paddle_0.x = padding;
+        paddle_0.y = ROOM_HEIGHT / 2 - Paddle.DEFAULT_HEIGHT / 2;
+        paddle_1.x = ROOM_WIDTH - Paddle.DEFAULT_WIDTH - padding;
         paddle_1.y = ROOM_HEIGHT / 2 - Paddle.DEFAULT_HEIGHT / 2;
+
         player_0_life = player_0_life_total;
         player_1_life = player_1_life_total;
 
         ballsToRemove.addAll(balls);
+        Ball b = new Ball(ROOM_WIDTH/2, ROOM_HEIGHT/2);
+        b.dx = 1500f;
+        ballsToAdd.add(b);
     }
 
     // public interface
@@ -152,6 +167,7 @@ public class Game implements GetDrawPayload {
                     b.x - b.radius > paddle_0.x &&
                     b.dx < 0) {
 
+                ResourceLoader.playBeep();
                 b.dx *= -1;
             }
 
@@ -160,6 +176,8 @@ public class Game implements GetDrawPayload {
                     b.x + b.radius > paddle_1.x &&
                     b.x + b.radius < paddle_1.x + paddle_1.width &&
                     b.dx > 0) {
+
+                ResourceLoader.playBeep();
                 b.dx *= -1;
             }
         }

@@ -35,7 +35,7 @@ public class Effect {
                 break;
 
             case SPEED_UP:
-                game.
+                game.increaseSpeed(2);
         }
     }
 

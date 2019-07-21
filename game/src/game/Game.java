@@ -41,6 +41,11 @@ public class Game implements GetDrawPayload {
     private final boolean running = true;
     private final int tickTime = 10;
 
+
+    // public interface
+    public final List<Ball> ballsToAdd = new ArrayList<>();
+    public final List<Ball> ballsToRemove = new ArrayList<>();
+
     public void mainloop() {
         long past = System.currentTimeMillis();
         long accumulator = 0;

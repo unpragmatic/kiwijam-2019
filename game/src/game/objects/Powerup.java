@@ -15,9 +15,12 @@ public class Powerup implements Drawable {
     public float x;
     public float y;
 
-    Effect.Name type;
+    public float width;
+    public float height;
 
-    public Powerup(float x, float y, Effect.Name type) {
+    public Effect.Name type;
+
+    public Powerup(float x, float y, float width, float height, Effect.Name type) {
         this.x = x;
         this.y = y;
         this.type = type;

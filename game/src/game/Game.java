@@ -145,6 +145,19 @@ public class Game implements GetDrawPayload {
             }
         }
     }
+    private void handle_ball_powerup_collision(float delta) {
+        for (Powerup p : powerups){
+
+            for (Ball b : balls){
+
+                if (Math.sqrt((b.x - p.x)*(b.x - p.x) + (b.y - p.y)*(b.y - p.y)) < 10){
+                    Effect.applyEffect(p.type, this, b);
+                }
+
+            }
+
+        }
+    }
 
     private void handleCollision(float delta) {
         // todo.
@@ -205,12 +218,6 @@ public class Game implements GetDrawPayload {
         }
         if (input.keyPressed(InputFrame.Y)){
             canonical_camera.translate_x += 10;
-        }
-        if (input.keyPressed(InputFrame.G)){
-            powerups.add(new Powerup(100, 100, Effect.Name.SPEED));
-        }
-        if (input.keyPressed(InputFrame.H)){
-            Effect.applyEffect(Effect.Name.SPEED, this, balls.get(0));
         }
         if (input.keyPressed(InputFrame.P)){
             Ball b = new Ball((float)Math.random()*ROOM_WIDTH, (float)Math.random()*ROOM_HEIGHT);

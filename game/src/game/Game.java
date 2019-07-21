@@ -45,6 +45,8 @@ public class Game implements GetDrawPayload {
     private final boolean running = true;
     private final int tickTime = 10;
 
+    private int powerupDeltaSum = 0;
+
     private void restart() {
         paddle_0.x = ROOM_WIDTH - Paddle.DEFAULT_WIDTH - padding;
         paddle_1.y = ROOM_HEIGHT / 2 - Paddle.DEFAULT_HEIGHT / 2;
@@ -98,6 +100,13 @@ public class Game implements GetDrawPayload {
         for (Ball b: balls) {
             b.x += b.dx * delta;
             b.y += b.dy * delta;
+            b.tick(delta);
+        }
+
+        powerupDeltaSum += delta;
+        if (powerupDeltaSum > 5){
+            powerups.add(Powerup.createRandomPowerup(200f, 200f, ROOM_WIDTH - 200f, ROOM_HEIGHT - 200f));
+            powerupDeltaSum = 0;
         }
 
         paddle_0.y += paddle_0.dy * delta;

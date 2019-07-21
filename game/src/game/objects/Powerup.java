@@ -2,15 +2,18 @@ package game.objects;
 
 import game.Camera;
 import game.Effect;
+import game.Game;
 import processing.Drawable;
 import processing.ResourceLoader;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.util.Random;
+
 public class Powerup implements Drawable {
 
-    public static final int IMAGE_WIDTH = 128;
-    public static final int IMAGE_HEIGHT = 128;
+    public static final float IMAGE_WIDTH = 50f;
+    public static final float IMAGE_HEIGHT = 50f;
 
     public float x;
     public float y;
@@ -24,6 +27,17 @@ public class Powerup implements Drawable {
         this.x = x;
         this.y = y;
         this.type = type;
+    }
+
+    public static Powerup createRandomPowerup(float x1, float y1, float x2, float y2){
+        Random r = new Random();
+
+        Effect.Name type = Effect.Name.values()[r.nextInt(Effect.Name.values().length)];
+
+        float xPos = (r.nextFloat() * (x2 - x1)) + x1;
+        float yPos = (r.nextFloat() * (y2 - y1)) + y1;
+
+        return new Powerup(xPos, yPos, IMAGE_WIDTH, IMAGE_HEIGHT, type);
     }
 
     @Override

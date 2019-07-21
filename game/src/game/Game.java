@@ -118,6 +118,11 @@ public class Game implements GetDrawPayload {
             b.tick(delta);
         }
 
+        canonical_camera.translate_x += canonical_camera.dx * delta;
+        canonical_camera.translate_y += canonical_camera.dy * delta;
+        canonical_camera.dx = canonical_camera.translate_x * delta * Math.max(1f, canonical_camera.dx * 0.5f);
+        canonical_camera.dy = canonical_camera.translate_y * delta * Math.max(1f, canonical_camera.dy * 0.5f);
+
         powerupDeltaSum += delta;
         if (powerupDeltaSum > 5){
             powerups.add(Powerup.createRandomPowerup(200f, 200f, ROOM_WIDTH - 200f, ROOM_HEIGHT - 200f));
@@ -195,9 +200,14 @@ public class Game implements GetDrawPayload {
         for (Ball b: balls) {
             if (b.y - b.radius < upper_border_y + upper_border.DEFAULT_HEIGHT && b.dy < 0) {
                 b.dy *= -1;
-            }
-            if (b.y + b.radius > lower_border_y && b.dy > 0) {
+
+                canonical_camera.dx += b.dx;
+                canonical_camera.dy += b.dy;
+            } else if (b.y + b.radius > lower_border_y && b.dy > 0) {
                 b.dy *= -1;
+
+                canonical_camera.dx += b.dx;
+                canonical_camera.dy += b.dy;
             }
 
             if (b.x - b.radius < -10) {

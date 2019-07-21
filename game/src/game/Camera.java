@@ -8,6 +8,9 @@ public class Camera {
     public float translate_x;
     public float translate_y;
 
+    public float dx;
+    public float dy;
+
     public Camera(float translate_x, float translate_y, float width, float height){
         this.translate_x = translate_x;
         this.translate_y = translate_y;

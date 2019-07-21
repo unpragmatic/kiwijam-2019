@@ -5,13 +5,13 @@ import game.objects.Ball;
 public class Effect {
 
     public enum Name {
-        SPEED, SPLIT, LIFE_UP
+        WARP, SPLIT, LIFE_UP, SPEED_UP
     }
 
     public static void applyEffect(Name effect, Game game, Ball colidee){
         switch (effect){
 
-            case SPEED:
+            case WARP:
                 colidee.dx = (float) (4000 / Math.sqrt((colidee.dx * colidee.dx) + (colidee.dy * colidee.dy))
                         * (colidee.dx));
                 colidee.dy = (float) (4000 / Math.sqrt((colidee.dx * colidee.dx) + (colidee.dy * colidee.dy))
@@ -32,7 +32,12 @@ public class Effect {
             case LIFE_UP:
                 game.increaseLife(1, 3);
                 game.increaseLife(1, 3);
+                break;
+
+            case SPEED_UP:
+                game.increaseSpeed(2);
         }
     }
+
 
 }

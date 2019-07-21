@@ -6,13 +6,15 @@ import processing.ResourceLoader;
 import processing.core.PApplet;
 
 public class Paddle implements Drawable {
-    public float max_speed = 1500;
+    public float max_speed = 500;
 
     public float x;
     public float y;
+    public float dx;
+    public float dy;
 
-    public static final float default_width = 35f;
-    public static final float default_height = 200f;
+    public static final float DEFAULT_WIDTH = 20f;
+    public static final float DEFAULT_HEIGHT = 200f;
 
     public float width;
     public float height;
@@ -20,8 +22,8 @@ public class Paddle implements Drawable {
     public Paddle(float x, float y){
         this.x = x;
         this.y = y;
-        this.width = Paddle.default_width;
-        this.height = Paddle.default_height;
+        this.width = Paddle.DEFAULT_WIDTH;
+        this.height = Paddle.DEFAULT_HEIGHT;
     }
 
 

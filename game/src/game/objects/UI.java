@@ -16,7 +16,7 @@ public class UI implements Drawable {
     private void drawHealthBars(PApplet d, Camera c) {
         int padding = (int) ((d.width / 2) * 0.05);
         int bar_width = (int) ((d.width /2 ) * 0.70);
-        int bar_height = (int) (d.height * 0.05);
+        int bar_height = (int) (d.height * 0.035);
         int seperator = (int) ((d.width /2 ) * 0.25);
 
 

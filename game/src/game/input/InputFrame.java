@@ -20,6 +20,7 @@ public class InputFrame {
     public final static int Y = 89;
     public final static int G = 71;
     public final static int H = 72;
+    public final static int P = 80;
 
     private final List<MouseDragListener> mouseDragListeners = new ArrayList<>();
     public void addMouseDragListener(MouseDragListener listener) {

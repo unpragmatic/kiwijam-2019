@@ -57,7 +57,7 @@ public class Game implements GetDrawPayload {
         }
     }
 
-    private void tick(float delta) {
+    private void tick(float delta) {f
         handleCollision(delta);
         handleInput(delta);
 

@@ -5,7 +5,7 @@ import game.objects.Ball;
 public class Effect {
 
     public enum Name {
-        SPEED, SPLIT
+        SPEED, SPLIT, LIFE_UP
     }
 
     public static void applyEffect(Name effect, Game game, Ball colidee){
@@ -27,7 +27,11 @@ public class Effect {
                 colidee.dx = (float) Math.sin(0.26) * original_dx;
                 colidee.dy = (float) Math.sin(-0.26) * original_dy;
                 game.ballsToAdd.add(secondBall);
+                break;
 
+            case LIFE_UP:
+                game.increaseLife(1, 3);
+                game.increaseLife(1, 3);
         }
     }
 

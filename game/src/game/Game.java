@@ -48,6 +48,11 @@ public class Game implements GetDrawPayload {
     public final List<Ball> ballsToAdd = new ArrayList<>();
     public final List<Ball> ballsToRemove = new ArrayList<>();
 
+    public void increaseLife(int player, int amount){
+        if (player == 0) player_0_life+= amount;
+        if (player == 1) player_1_life+= amount;
+    }
+
     public void mainloop() {
         long past = System.currentTimeMillis();
         long accumulator = 0;

@@ -52,7 +52,7 @@ public class Game implements GetDrawPayload {
     private Camera canonical_camera = new Camera(0, 0, ROOM_WIDTH, ROOM_HEIGHT);
 
     private final boolean running = true;
-    private final int tickTime = 10;
+    private final int tickTime = 5;
 
     private void restart() {
         paddle_0.x = padding;

@@ -21,6 +21,7 @@ public class Main extends PApplet {
     public void setup(){
         resourceLoader = new ResourceLoader(this);
         surface.setResizable(true);
+        frameRate(60);
     }
 
     @Override

@@ -27,6 +27,7 @@ public class Border implements Drawable {
         int pixel_width = c.world_to_pixel_width(DEFAULT_WIDTH, d.width);
         int pixel_height = c.world_to_pixel_y(DEFAULT_HEIGHT, d.height);
 
+        d.fill(110, 110, 110);
         d.rect(pixel_x, pixel_y, pixel_width, pixel_height);
     }
 }

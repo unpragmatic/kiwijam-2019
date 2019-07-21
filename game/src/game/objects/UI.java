@@ -24,9 +24,11 @@ public class UI implements Drawable {
         d.rect(padding, padding, bar_width, bar_height);
         d.rect(d.width/2 + seperator, padding, bar_width, bar_height);
 
+        float hp_lost = bar_width * ((game.player_0_life_total - game.player_0_life) / (float)game.player_0_life_total);
         d.fill(175, 4, 4);
-        d.rect(padding, padding, bar_width, bar_height);
-        d.rect(d.width/2 + seperator, padding, bar_width, bar_height);
+        d.rect(padding, padding, bar_width - hp_lost, bar_height);
+        hp_lost = bar_width * ((game.player_1_life_total - game.player_1_life) / (float)game.player_1_life_total);
+        d.rect(d.width/2 + seperator + hp_lost, padding, bar_width - hp_lost, bar_height);
     }
 
     @Override

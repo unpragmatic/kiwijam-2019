@@ -4,24 +4,42 @@ import game.Effect;
 import game.objects.Powerup;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.sound.SoundFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.PipedWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class ResourceLoader {
 
     private Map<String, PImage> imageMap = new HashMap<>();
+    private Map<String, SoundFile> soundFiles = new HashMap<>();
 
     public ResourceLoader(PApplet applet){
-        loadImages(applet);
+        loadAssets(applet);
     }
 
-    private void loadImages(PApplet applet){
-        for (Effect.Name effectName : Effect.Name.values()){
-            PImage img = applet.loadImage(effectName.toString() + ".png");
-            //img.resize(Powerup.IMAGE_WIDTH, Powerup.IMAGE_HEIGHT);
-            imageMap.put(effectName.toString(), img);
+    private void loadAssets(PApplet applet) {
+        try (Stream<Path> files = Files.walk(Paths.get("./src/data"))) {
+            files.filter(Files::isRegularFile)
+                    .map(Path::getFileName)
+                    .forEach(s -> {
+                        System.out.println(s);
+                        if (s.endsWith(".png")) {
+                            imageMap.put(s.toString(), applet.loadImage(s.toString()));
+                        } else if (s.endsWith(".mp3")) {
+                            soundFiles.put(s.toString(), new SoundFile(applet, s.toString()));
+                        }
+                    });
+
+        } catch (IOException e) {
+            throw new RuntimeException("Couldn't load files");
         }
     }
 
@@ -29,4 +47,7 @@ public class ResourceLoader {
         return imageMap.get(imageName);
     }
 
+    public SoundFile getSoundFile(String filename) {
+        return soundFiles.get(filename);
+    }
 }

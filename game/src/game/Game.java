@@ -75,6 +75,11 @@ public class Game implements GetDrawPayload {
             b.x += b.dx * delta;
             b.y += b.dy * delta;
         }
+
+        balls.removeAll(ballsToRemove);
+        balls.addAll(ballsToAdd);
+        ballsToRemove.clear();
+        ballsToAdd.clear();
     }
 
     private void handleCollision(float delta) {

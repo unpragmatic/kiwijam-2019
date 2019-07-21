@@ -62,7 +62,7 @@ public class Game implements GetDrawPayload {
         }
     }
 
-    private void tick(float delta) {f
+    private void tick(float delta) {
         handleCollision(delta);
         handleInput(delta);
 
@@ -70,6 +70,11 @@ public class Game implements GetDrawPayload {
             b.x += b.dx * delta;
             b.y += b.dy * delta;
         }
+
+        balls.removeAll(ballsToRemove);
+        balls.addAll(ballsToAdd);
+        ballsToRemove.clear();
+        ballsToAdd.clear();
     }
 
     private void handleCollision(float delta) {

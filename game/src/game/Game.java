@@ -53,6 +53,13 @@ public class Game implements GetDrawPayload {
         if (player == 1) player_1_life+= amount;
     }
 
+    public void increaseSpeed(int factor){
+        for (Ball ball : balls){
+            ball.dx *= factor;
+            ball.dy *= factor;
+        }
+    }
+
     public void mainloop() {
         long past = System.currentTimeMillis();
         long accumulator = 0;

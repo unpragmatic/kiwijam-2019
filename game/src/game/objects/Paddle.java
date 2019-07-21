@@ -26,7 +26,6 @@ public class Paddle implements Drawable {
         this.height = Paddle.DEFAULT_HEIGHT;
     }
 
-
     @Override
     public void draw(PApplet d, Camera c, ResourceLoader r) {
 

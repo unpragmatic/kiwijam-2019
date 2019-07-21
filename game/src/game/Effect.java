@@ -5,16 +5,29 @@ import game.objects.Ball;
 public class Effect {
 
     public enum Name {
-        SPEED
+        SPEED, SPLIT
     }
 
     public static void applyEffect(Name effect, Game game, Ball colidee){
         switch (effect){
 
             case SPEED:
-                System.out.println("Gotta go fast!");
-                colidee.dx = (float) (4000 / Math.sqrt((colidee.dx * colidee.dx) + (colidee.dy * colidee.dy)) * (colidee.dx));
-                colidee.dy = (float) (4000 / Math.sqrt((colidee.dx * colidee.dx) + (colidee.dy * colidee.dy)) * (colidee.dy));
+                colidee.dx = (float) (4000 / Math.sqrt((colidee.dx * colidee.dx) + (colidee.dy * colidee.dy))
+                        * (colidee.dx));
+                colidee.dy = (float) (4000 / Math.sqrt((colidee.dx * colidee.dx) + (colidee.dy * colidee.dy))
+                        * (colidee.dy));
+                break;
+
+            case SPLIT:
+                float original_dx = colidee.dx;
+                float original_dy = colidee.dy;
+
+                Ball secondBall = new Ball(colidee.x, colidee.y);
+
+                colidee.dx = (float) Math.sin(0.26) * original_dx;
+                colidee.dy = (float) Math.sin(-0.26) * original_dy;
+                game.ballsToAdd.add(secondBall);
+
         }
     }
 

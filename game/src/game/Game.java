@@ -17,8 +17,8 @@ public class Game implements GetDrawPayload {
     private final float upper_border_y = ROOM_HEIGHT * 0.10f;
     private final float lower_border_y = ROOM_HEIGHT * 0.90f;
 
-    public int player_0_life_total = 100;
-    public int player_1_life_total = 100;
+    public int player_0_life_total = 20;
+    public int player_1_life_total = 20;
     public int player_0_life = player_0_life_total;
     public int player_1_life = player_1_life_total;
 
@@ -54,7 +54,8 @@ public class Game implements GetDrawPayload {
     private final boolean running = true;
     private final int tickTime = 5;
 
-    private int powerupDeltaSum = 0;
+    private float powerupDeltaSum = 0;
+    private float ballspawnDeltaSum = 0;
 
     private void restart() {
         paddle_0.x = padding;
@@ -74,6 +75,8 @@ public class Game implements GetDrawPayload {
     // public interface
     public final List<Ball> ballsToAdd = new ArrayList<>();
     public final List<Ball> ballsToRemove = new ArrayList<>();
+
+    public final List<Powerup> powerupsToRemove = new ArrayList<>();
 
     public void increaseLife(int player, int amount){
         if (player == 0) player_0_life += amount;
@@ -118,15 +121,27 @@ public class Game implements GetDrawPayload {
             b.tick(delta);
         }
 
-        canonical_camera.translate_x += canonical_camera.dx * delta;
-        canonical_camera.translate_y += canonical_camera.dy * delta;
-        canonical_camera.dx = canonical_camera.translate_x * delta * Math.max(1f, canonical_camera.dx * 0.5f);
-        canonical_camera.dy = canonical_camera.translate_y * delta * Math.max(1f, canonical_camera.dy * 0.5f);
+//        canonical_camera.translate_x += canonical_camera.dx * delta;
+//        canonical_camera.translate_y += canonical_camera.dy * delta;
+//        canonical_camera.dx = -canonical_camera.translate_x * delta;
+//        canonical_camera.dy = canonical_camera.translate_y * delta;
 
         powerupDeltaSum += delta;
         if (powerupDeltaSum > 5){
             powerups.add(Powerup.createRandomPowerup(200f, 200f, ROOM_WIDTH - 200f, ROOM_HEIGHT - 200f));
             powerupDeltaSum = 0;
+        }
+
+        ballspawnDeltaSum += delta;
+        if (ballspawnDeltaSum > 1){
+            Ball createdBall = new Ball(ROOM_WIDTH / 2, ROOM_HEIGHT / 2);
+            createdBall.dx = -1500f;
+            double angle = Math.random()*Math.PI*2;
+            createdBall.dx = (float) (Math.cos(angle) * -1500f);
+            createdBall.dy = (float) (Math.sin(angle) * -1500f);
+            ballsToAdd.add(createdBall);
+            ballspawnDeltaSum = 0;
+
         }
 
         paddle_0.y += paddle_0.dy * delta;
@@ -144,6 +159,8 @@ public class Game implements GetDrawPayload {
 
         balls.removeAll(ballsToRemove);
         balls.addAll(ballsToAdd);
+
+        powerups.removeAll(powerupsToRemove);
         ballsToRemove.clear();
         ballsToAdd.clear();
     }
@@ -178,20 +195,32 @@ public class Game implements GetDrawPayload {
         for (Ball b: balls) {
             if (b.y > paddle_0.y && b.y < paddle_0.y + paddle_0.height &&
                     b.x - b.radius < paddle_0.x + paddle_0.width &&
-                    b.x - b.radius > paddle_0.x &&
+                    b.x - b.radius > paddle_0.x - 50 &&
                     b.dx < 0) {
 
                 ResourceLoader.playBeep();
+                Ball createdBall = new Ball(ROOM_WIDTH/2, ROOM_HEIGHT/2);
+                createdBall.dx = -1500f;
+                double angle = Math.random()*Math.PI*2;
+                createdBall.dx = (float) (Math.cos(angle) * -1500f);
+                createdBall.dy = (float) (Math.sin(angle) * -1500f);
+                ballsToAdd.add(createdBall);
                 b.dx *= -1;
             }
 
             // With right side
             if (b.y > paddle_1.y && b.y < paddle_1.y + paddle_1.height &&
                     b.x + b.radius > paddle_1.x &&
-                    b.x + b.radius < paddle_1.x + paddle_1.width &&
+                    b.x + b.radius < paddle_1.x + paddle_1.width + 50f &&
                     b.dx > 0) {
 
                 ResourceLoader.playBeep();
+                Ball createdBall = new Ball(ROOM_WIDTH/2, ROOM_HEIGHT/2);
+                createdBall.dx = -1500f;
+                double angle = Math.random()*Math.PI*2;
+                createdBall.dx = (float) (Math.cos(angle) * -1500f);
+                createdBall.dy = (float) (Math.sin(angle) * -1500f);
+                ballsToAdd.add(createdBall);
                 b.dx *= -1;
             }
         }
@@ -225,8 +254,9 @@ public class Game implements GetDrawPayload {
 
             for (Ball b : balls){
 
-                if (Math.sqrt((b.x - p.x)*(b.x - p.x) + (b.y - p.y)*(b.y - p.y)) < 10){
+                if (Math.sqrt((b.x - p.x)*(b.x - p.x) + (b.y - p.y)*(b.y - p.y)) < 100f){
                     Effect.applyEffect(p.type, this, b);
+                    powerupsToRemove.add(p);
                 }
 
             }
@@ -239,6 +269,7 @@ public class Game implements GetDrawPayload {
         handle_ball_ball_collision(delta);
         handle_ball_paddle_collision(delta);
         handle_ball_border_collision(delta);
+        handle_ball_powerup_collision(delta);
     }
 
     private void handleInput_paddles(float delta) {

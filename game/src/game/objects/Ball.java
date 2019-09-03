@@ -17,7 +17,7 @@ public class Ball implements Drawable {
     public float y;
     public float dx;
     public float dy;
-    public float radius = 12.5f;
+    public float radius = 30.5f;
 
     private float deltaSum = 0f;
 

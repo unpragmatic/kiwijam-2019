@@ -42,7 +42,7 @@ public class Powerup implements Drawable {
 
     @Override
     public void draw(PApplet d, Camera c, ResourceLoader r) {
-        PImage img = r.getImage(type.toString());
+        PImage img = r.getImage(type.toString() + ".png");
         int pixel_x = c.world_to_pixel_x(x, d.width);
         int pixel_y = c.world_to_pixel_y(y, d.height);
 
